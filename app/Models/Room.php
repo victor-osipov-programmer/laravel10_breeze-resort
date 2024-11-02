@@ -16,4 +16,7 @@ class Room extends Model
     function users() {
         return $this->hasMany(User::class, 'id_childdata');
     }
+    function hotel() {
+        return $this->belongsTo(Hotel::class, 'hotel_id');
+    }
 }

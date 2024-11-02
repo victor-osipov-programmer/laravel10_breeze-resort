@@ -34,5 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/hotel', [HotelController::class, 'store']);
     Route::get('/hotels', [HotelController::class, 'index']);
     Route::delete('/hotel/{hotel}', [HotelController::class, 'destroy']);
+    Route::get('/hotel/{hotel}/room/{room}', [HotelController::class, 'add_room']);
+    Route::get('/roomsinhotels', [HotelController::class, 'roomsinhotels']);
 
 });

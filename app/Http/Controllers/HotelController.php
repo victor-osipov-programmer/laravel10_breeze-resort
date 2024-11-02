@@ -6,6 +6,8 @@ use App\Models\Hotel;
 use App\Http\Requests\StoreHotelRequest;
 use App\Http\Requests\UpdateHotelRequest;
 use App\Http\Resources\HotelResource;
+use App\Http\Resources\UsersInRoomsInHotel;
+use App\Models\Room;
 
 class HotelController extends Controller
 {
@@ -65,5 +67,24 @@ class HotelController extends Controller
                 'message' => 'Deleted'
             ]
         ];
+    }
+    public function add_room(Hotel $hotel, Room $room)
+    {
+        $room->update([
+            'hotel_id' => $hotel->id
+        ]);
+
+        return [
+            'data' => [
+                'name' => $room->name,
+                'title' => $room->desc_data,
+            ]
+        ];
+    }
+
+    function roomsinhotels() {
+        $hotels = Hotel::with('rooms.users')->get();
+
+        return UsersInRoomsInHotel::collection($hotels);
     }
 }
